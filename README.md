@@ -11,7 +11,7 @@
 
 **Maps all CMMC 2.0 Level 2 practices to AWS service implementations and generates OSCAL-compliant Component Definition documents.**
 
-[Live Demo](#) · [OSCAL Export](#oscal-export) · [CLI Reference](#cli-reference)
+[Live Demo](https://cmmc-control-mapper-bzvfqfuaajk5turqzsadhm.streamlit.app/) · [OSCAL Export](#oscal-export) · [CLI Reference](#cli-reference)
 
 </div>
 
