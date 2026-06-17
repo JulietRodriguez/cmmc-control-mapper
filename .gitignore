@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv
+venv/
+*.json.bak
+.streamlit/secrets.toml
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+coverage.xml
+*.egg
