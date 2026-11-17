@@ -1,31 +1,2239 @@
 [
-  {"id": "AC.L1-3.1.1", "domain": "Access Control", "level": 1, "practice": "Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems).", "nist_mapping": ["AC-2", "AC-3", "AC-17"], "aws_services": ["AWS IAM", "AWS SSO", "AWS Organizations"], "aws_config_rules": ["iam-user-unused-credentials-check", "iam-root-access-key-check"], "cmmc_level": "Level 1"},
-  {"id": "AC.L1-3.1.2", "domain": "Access Control", "level": 1, "practice": "Limit system access to the types of transactions and functions that authorized users are permitted to execute.", "nist_mapping": ["AC-3"], "aws_services": ["AWS IAM", "AWS SCP", "AWS IAM Roles"], "aws_config_rules": ["iam-policy-no-statements-with-admin-access"], "cmmc_level": "Level 1"},
-  {"id": "AC.L1-3.1.20", "domain": "Access Control", "level": 1, "practice": "Verify and control/limit connections to external systems.", "nist_mapping": ["AC-17", "AC-20"], "aws_services": ["AWS VPC", "AWS Transit Gateway", "AWS Direct Connect"], "aws_config_rules": ["vpc-default-security-group-closed"], "cmmc_level": "Level 1"},
-  {"id": "AC.L1-3.1.22", "domain": "Access Control", "level": 1, "practice": "Control CUI posted or processed on publicly accessible systems.", "nist_mapping": ["AC-22"], "aws_services": ["AWS S3", "AWS CloudFront", "AWS WAF"], "aws_config_rules": ["s3-bucket-public-read-prohibited", "s3-bucket-public-write-prohibited"], "cmmc_level": "Level 1"},
-  {"id": "AC.L2-3.1.3", "domain": "Access Control", "level": 2, "practice": "Control the flow of CUI in accordance with approved authorizations.", "nist_mapping": ["AC-4"], "aws_services": ["AWS VPC", "AWS Network Firewall", "AWS PrivateLink"], "aws_config_rules": ["vpc-sg-open-only-to-authorized-ports"], "cmmc_level": "Level 2"},
-  {"id": "AC.L2-3.1.4", "domain": "Access Control", "level": 2, "practice": "Separate the duties of individuals to reduce the risk of malevolent activity without collusion.", "nist_mapping": ["AC-5"], "aws_services": ["AWS IAM", "AWS Organizations", "AWS SCP"], "aws_config_rules": ["iam-policy-no-statements-with-admin-access"], "cmmc_level": "Level 2"},
-  {"id": "AC.L2-3.1.5", "domain": "Access Control", "level": 2, "practice": "Employ the principle of least privilege, including for specific security functions and privileged accounts.", "nist_mapping": ["AC-6"], "aws_services": ["AWS IAM", "AWS IAM Access Analyzer", "AWS Trusted Advisor"], "aws_config_rules": ["iam-user-no-policies-check", "iam-root-access-key-check"], "cmmc_level": "Level 2"},
-  {"id": "AC.L2-3.1.6", "domain": "Access Control", "level": 2, "practice": "Use non-privileged accounts or roles when accessing non-security functions.", "nist_mapping": ["AC-6(2)"], "aws_services": ["AWS IAM Roles", "AWS STS", "AWS SSO"], "aws_config_rules": ["iam-root-access-key-check"], "cmmc_level": "Level 2"},
-  {"id": "AC.L2-3.1.7", "domain": "Access Control", "level": 2, "practice": "Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs.", "nist_mapping": ["AC-6(9)", "AC-6(10)"], "aws_services": ["AWS CloudTrail", "AWS IAM", "AWS CloudWatch"], "aws_config_rules": ["cloud-trail-enabled", "cloudtrail-s3-dataevents-enabled"], "cmmc_level": "Level 2"},
-  {"id": "AC.L2-3.1.8", "domain": "Access Control", "level": 2, "practice": "Limit unsuccessful logon attempts.", "nist_mapping": ["AC-7"], "aws_services": ["AWS Cognito", "AWS IAM", "AWS WAF"], "aws_config_rules": [], "cmmc_level": "Level 2"},
-  {"id": "AU.L2-3.3.1", "domain": "Audit & Accountability", "level": 2, "practice": "Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity.", "nist_mapping": ["AU-2", "AU-3", "AU-12"], "aws_services": ["AWS CloudTrail", "AWS CloudWatch Logs", "AWS S3"], "aws_config_rules": ["cloud-trail-enabled", "cloudtrail-s3-dataevents-enabled"], "cmmc_level": "Level 2"},
-  {"id": "AU.L2-3.3.2", "domain": "Audit & Accountability", "level": 2, "practice": "Ensure that the actions of individual system users can be uniquely traced to those users so they can be held accountable for their actions.", "nist_mapping": ["AU-2", "AU-12"], "aws_services": ["AWS CloudTrail", "AWS IAM", "AWS Config"], "aws_config_rules": ["cloud-trail-enabled"], "cmmc_level": "Level 2"},
-  {"id": "CM.L2-3.4.1", "domain": "Configuration Management", "level": 2, "practice": "Establish and maintain baseline configurations and inventories of organizational systems.", "nist_mapping": ["CM-2", "CM-8"], "aws_services": ["AWS Config", "AWS Systems Manager", "AWS Service Catalog"], "aws_config_rules": ["ec2-managedinstance-association-compliance-status-check"], "cmmc_level": "Level 2"},
-  {"id": "CM.L2-3.4.2", "domain": "Configuration Management", "level": 2, "practice": "Establish and enforce security configuration settings for information technology products employed in organizational systems.", "nist_mapping": ["CM-6"], "aws_services": ["AWS Config", "AWS Security Hub", "AWS Systems Manager"], "aws_config_rules": ["ec2-security-group-attached-to-eni", "restricted-ssh"], "cmmc_level": "Level 2"},
-  {"id": "IA.L1-3.5.1", "domain": "Identification & Authentication", "level": 1, "practice": "Identify system users, processes acting on behalf of users, and devices.", "nist_mapping": ["IA-2", "IA-3", "IA-5"], "aws_services": ["AWS IAM", "AWS SSO", "AWS Directory Service"], "aws_config_rules": ["iam-user-mfa-enabled"], "cmmc_level": "Level 1"},
-  {"id": "IA.L1-3.5.2", "domain": "Identification & Authentication", "level": 1, "practice": "Authenticate (or verify) the identities of those users, processes, or devices, as a prerequisite to allowing access to organizational systems.", "nist_mapping": ["IA-2", "IA-3", "IA-5"], "aws_services": ["AWS IAM", "AWS SSO", "AWS MFA"], "aws_config_rules": ["iam-user-mfa-enabled", "root-account-mfa-enabled"], "cmmc_level": "Level 1"},
-  {"id": "IA.L2-3.5.3", "domain": "Identification & Authentication", "level": 2, "practice": "Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts.", "nist_mapping": ["IA-2(1)", "IA-2(2)"], "aws_services": ["AWS IAM MFA", "AWS SSO", "AWS Virtual MFA"], "aws_config_rules": ["iam-user-mfa-enabled", "root-account-mfa-enabled", "mfa-enabled-for-iam-console-access"], "cmmc_level": "Level 2"},
-  {"id": "IR.L2-3.6.1", "domain": "Incident Response", "level": 2, "practice": "Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities.", "nist_mapping": ["IR-2", "IR-4", "IR-5", "IR-6"], "aws_services": ["AWS Security Hub", "Amazon GuardDuty", "AWS Systems Manager Incident Manager"], "aws_config_rules": ["guardduty-enabled-centralized"], "cmmc_level": "Level 2"},
-  {"id": "MA.L2-3.7.1", "domain": "Maintenance", "level": 2, "practice": "Perform maintenance on organizational systems.", "nist_mapping": ["MA-2"], "aws_services": ["AWS Systems Manager Patch Manager", "AWS Config"], "aws_config_rules": ["ec2-managedinstance-patch-compliance-status-check"], "cmmc_level": "Level 2"},
-  {"id": "MP.L2-3.8.1", "domain": "Media Protection", "level": 2, "practice": "Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital.", "nist_mapping": ["MP-2", "MP-4"], "aws_services": ["AWS S3", "AWS EBS", "AWS KMS"], "aws_config_rules": ["encrypted-volumes", "s3-bucket-server-side-encryption-enabled"], "cmmc_level": "Level 2"},
-  {"id": "PE.L1-3.10.1", "domain": "Physical Protection", "level": 1, "practice": "Limit physical access to organizational systems to authorized individuals.", "nist_mapping": ["PE-2", "PE-3", "PE-6"], "aws_services": ["AWS Data Centers (inherited)", "AWS Artifact"], "aws_config_rules": [], "cmmc_level": "Level 1"},
-  {"id": "PS.L2-3.9.1", "domain": "Personnel Security", "level": 2, "practice": "Screen individuals prior to authorizing access to organizational systems containing CUI.", "nist_mapping": ["PS-3"], "aws_services": ["AWS IAM", "AWS SSO"], "aws_config_rules": [], "cmmc_level": "Level 2"},
-  {"id": "RA.L2-3.11.1", "domain": "Risk Assessment", "level": 2, "practice": "Periodically assess the risk to organizational operations, organizational assets, and individuals, resulting from the operation of organizational systems.", "nist_mapping": ["RA-3"], "aws_services": ["AWS Security Hub", "Amazon Inspector", "AWS Config"], "aws_config_rules": ["securityhub-enabled"], "cmmc_level": "Level 2"},
-  {"id": "CA.L2-3.12.1", "domain": "Security Assessment", "level": 2, "practice": "Periodically assess the security controls in organizational systems to determine if the controls are effective in their application.", "nist_mapping": ["CA-2"], "aws_services": ["AWS Security Hub", "AWS Config", "Amazon Inspector"], "aws_config_rules": ["securityhub-enabled"], "cmmc_level": "Level 2"},
-  {"id": "SC.L1-3.13.1", "domain": "System & Communications Protection", "level": 1, "practice": "Monitor, control, and protect communications at the external boundaries and key internal boundaries of organizational systems.", "nist_mapping": ["SC-5", "SC-7"], "aws_services": ["AWS VPC", "AWS Network Firewall", "AWS Shield"], "aws_config_rules": ["vpc-default-security-group-closed", "restricted-ssh"], "cmmc_level": "Level 1"},
-  {"id": "SC.L2-3.13.8", "domain": "System & Communications Protection", "level": 2, "practice": "Implement cryptographic mechanisms to prevent unauthorized disclosure of CUI during transmission.", "nist_mapping": ["SC-8"], "aws_services": ["AWS ACM", "AWS KMS", "AWS CloudFront"], "aws_config_rules": ["alb-http-to-https-redirection-check", "elb-tls-https-listeners-only"], "cmmc_level": "Level 2"},
-  {"id": "SI.L1-3.14.1", "domain": "System & Information Integrity", "level": 1, "practice": "Identify, report, and correct system flaws in a timely manner.", "nist_mapping": ["SI-2"], "aws_services": ["AWS Systems Manager Patch Manager", "Amazon Inspector", "AWS Security Hub"], "aws_config_rules": ["ec2-managedinstance-patch-compliance-status-check"], "cmmc_level": "Level 1"},
-  {"id": "SI.L1-3.14.2", "domain": "System & Information Integrity", "level": 1, "practice": "Provide protection from malicious code at appropriate locations within organizational systems.", "nist_mapping": ["SI-3"], "aws_services": ["Amazon GuardDuty", "AWS Security Hub", "Amazon Macie"], "aws_config_rules": ["guardduty-enabled-centralized"], "cmmc_level": "Level 1"},
-  {"id": "SI.L2-3.14.6", "domain": "System & Information Integrity", "level": 2, "practice": "Monitor organizational systems, including the source and destination of communications traffic, to detect attacks and indicators of potential attacks.", "nist_mapping": ["SI-4"], "aws_services": ["Amazon GuardDuty", "AWS Security Hub", "VPC Flow Logs", "AWS CloudTrail"], "aws_config_rules": ["guardduty-enabled-centralized", "cloud-trail-enabled"], "cmmc_level": "Level 2"}
+  {
+    "id": "AC.L2-3.1.1",
+    "nist_800_171": "3.1.1",
+    "title": "Authorized Access Control",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems).",
+    "nist_mapping": [
+      "AC-2",
+      "AC-3",
+      "AC-17"
+    ],
+    "aws_services": [
+      "AWS IAM",
+      "Amazon S3"
+    ],
+    "aws_config_rules": [
+      "iam-root-access-key-check",
+      "iam-user-unused-credentials-check",
+      "mfa-enabled-for-iam-console-access",
+      "iam-policy-no-statements-with-admin-access",
+      "s3-bucket-public-read-prohibited"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.2",
+    "nist_800_171": "3.1.2",
+    "title": "Transaction & Function Control",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Limit system access to the types of transactions and functions that authorized users are permitted to execute.",
+    "nist_mapping": [
+      "AC-2",
+      "AC-3",
+      "AC-17"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-policy-no-statements-with-admin-access",
+      "iam-user-no-policies-check",
+      "iam-user-group-membership-check",
+      "iam-no-inline-policy-check"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.3",
+    "nist_800_171": "3.1.3",
+    "title": "Control CUI Flow",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Control the flow of CUI in accordance with approved authorizations.",
+    "nist_mapping": [
+      "AC-4"
+    ],
+    "aws_services": [
+      "AWS Lambda",
+      "Amazon S3",
+      "Amazon VPC"
+    ],
+    "aws_config_rules": [
+      "vpc-default-security-group-closed",
+      "restricted-ssh",
+      "no-unrestricted-route-to-igw",
+      "s3-account-level-public-access-blocks-periodic",
+      "lambda-inside-vpc"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.4",
+    "nist_800_171": "3.1.4",
+    "title": "Separation of Duties",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Separate the duties of individuals to reduce the risk of malevolent activity without collusion.",
+    "nist_mapping": [
+      "AC-5"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-group-has-users-check",
+      "iam-user-group-membership-check",
+      "iam-policy-no-statements-with-full-access"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.5",
+    "nist_800_171": "3.1.5",
+    "title": "Least Privilege",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Employ the principle of least privilege, including for specific security functions and privileged accounts.",
+    "nist_mapping": [
+      "AC-6",
+      "AC-6(1)",
+      "AC-6(5)"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-policy-no-statements-with-admin-access",
+      "iam-policy-no-statements-with-full-access",
+      "iam-root-access-key-check",
+      "iam-inline-policy-blocked-kms-actions"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.6",
+    "nist_800_171": "3.1.6",
+    "title": "Non-Privileged Account Use",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Use non-privileged accounts or roles when accessing nonsecurity functions.",
+    "nist_mapping": [
+      "AC-6(2)"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-root-access-key-check",
+      "iam-user-no-policies-check",
+      "iam-user-group-membership-check"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.7",
+    "nist_800_171": "3.1.7",
+    "title": "Privileged Functions",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs.",
+    "nist_mapping": [
+      "AC-6(9)",
+      "AC-6(10)"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "cloudtrail-enabled",
+      "multi-region-cloudtrail-enabled",
+      "iam-policy-no-statements-with-admin-access",
+      "iam-customer-policy-blocked-kms-actions"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.8",
+    "nist_800_171": "3.1.8",
+    "title": "Unsuccessful Logon Attempts",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Limit unsuccessful logon attempts.",
+    "nist_mapping": [
+      "AC-7"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.9",
+    "nist_800_171": "3.1.9",
+    "title": "Privacy & Security Notices",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Provide privacy and security notices consistent with applicable CUI rules.",
+    "nist_mapping": [
+      "AC-8"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.10",
+    "nist_800_171": "3.1.10",
+    "title": "Session Lock",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Use session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity.",
+    "nist_mapping": [
+      "AC-11",
+      "AC-11(1)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.11",
+    "nist_800_171": "3.1.11",
+    "title": "Session Termination",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Terminate (automatically) a user session after a defined condition.",
+    "nist_mapping": [
+      "AC-12"
+    ],
+    "aws_services": [
+      "AWS IAM Identity Center",
+      "AWS Systems Manager"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.12",
+    "nist_800_171": "3.1.12",
+    "title": "Control Remote Access",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Monitor and control remote access sessions.",
+    "nist_mapping": [
+      "AC-17(1)"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "AWS Security Hub",
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "cloud-trail-cloud-watch-logs-enabled",
+      "guardduty-enabled-centralized",
+      "securityhub-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.13",
+    "nist_800_171": "3.1.13",
+    "title": "Remote Access Confidentiality",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Employ cryptographic mechanisms to protect the confidentiality of remote access sessions.",
+    "nist_mapping": [
+      "AC-17(2)"
+    ],
+    "aws_services": [
+      "AWS Certificate Manager",
+      "Amazon API Gateway",
+      "Elastic Load Balancing"
+    ],
+    "aws_config_rules": [
+      "elb-tls-https-listeners-only",
+      "alb-http-to-https-redirection-check",
+      "api-gw-ssl-enabled",
+      "acm-certificate-expiration-check"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.14",
+    "nist_800_171": "3.1.14",
+    "title": "Remote Access Routing",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Route remote access via managed access control points.",
+    "nist_mapping": [
+      "AC-17(3)"
+    ],
+    "aws_services": [
+      "AWS Client VPN",
+      "AWS Systems Manager"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.15",
+    "nist_800_171": "3.1.15",
+    "title": "Privileged Remote Access",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Authorize remote execution of privileged commands and remote access to security-relevant information.",
+    "nist_mapping": [
+      "AC-17(4)"
+    ],
+    "aws_services": [
+      "AWS IAM",
+      "AWS Systems Manager"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.16",
+    "nist_800_171": "3.1.16",
+    "title": "Wireless Access Authorization",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Authorize wireless access prior to allowing such connections.",
+    "nist_mapping": [
+      "AC-18"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.17",
+    "nist_800_171": "3.1.17",
+    "title": "Wireless Access Protection",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Protect wireless access using authentication and encryption.",
+    "nist_mapping": [
+      "AC-18(1)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.18",
+    "nist_800_171": "3.1.18",
+    "title": "Mobile Device Connection",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Control connection of mobile devices.",
+    "nist_mapping": [
+      "AC-19"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.19",
+    "nist_800_171": "3.1.19",
+    "title": "Encrypt CUI on Mobile",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Encrypt CUI on mobile devices and mobile computing platforms.",
+    "nist_mapping": [
+      "AC-19(5)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.20",
+    "nist_800_171": "3.1.20",
+    "title": "External Connections",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Verify and control/limit connections to and use of external systems.",
+    "nist_mapping": [
+      "AC-20",
+      "AC-20(1)"
+    ],
+    "aws_services": [
+      "AWS WAF",
+      "Amazon EC2",
+      "Amazon VPC"
+    ],
+    "aws_config_rules": [
+      "internet-gateway-authorized-vpc-only",
+      "no-unrestricted-route-to-igw",
+      "ec2-instance-no-public-ip",
+      "alb-waf-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.21",
+    "nist_800_171": "3.1.21",
+    "title": "Portable Storage Use",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Limit use of portable storage devices on external systems.",
+    "nist_mapping": [
+      "AC-20(2)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AC.L2-3.1.22",
+    "nist_800_171": "3.1.22",
+    "title": "Control Public Information",
+    "domain": "Access Control",
+    "domain_code": "AC",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Control CUI posted or processed on publicly accessible systems.",
+    "nist_mapping": [
+      "AC-22"
+    ],
+    "aws_services": [
+      "Amazon Macie",
+      "Amazon S3"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AT.L2-3.2.1",
+    "nist_800_171": "3.2.1",
+    "title": "Role-Based Risk Awareness",
+    "domain": "Awareness & Training",
+    "domain_code": "AT",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Ensure that managers, systems administrators, and users of organizational systems are made aware of the security risks associated with their activities and of the applicable policies, standards, and procedures related to the security of those systems.",
+    "nist_mapping": [
+      "AT-2",
+      "AT-3"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AT.L2-3.2.2",
+    "nist_800_171": "3.2.2",
+    "title": "Role-Based Training",
+    "domain": "Awareness & Training",
+    "domain_code": "AT",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Ensure that personnel are trained to carry out their assigned information security-related duties and responsibilities.",
+    "nist_mapping": [
+      "AT-2",
+      "AT-3"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AT.L2-3.2.3",
+    "nist_800_171": "3.2.3",
+    "title": "Insider Threat Awareness",
+    "domain": "Awareness & Training",
+    "domain_code": "AT",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Provide security awareness training on recognizing and reporting potential indicators of insider threat.",
+    "nist_mapping": [
+      "AT-2(2)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.1",
+    "nist_800_171": "3.3.1",
+    "title": "System Auditing",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity.",
+    "nist_mapping": [
+      "AU-2",
+      "AU-3",
+      "AU-3(1)",
+      "AU-6",
+      "AU-12"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "Amazon CloudWatch",
+      "Amazon RDS",
+      "Amazon S3"
+    ],
+    "aws_config_rules": [
+      "cloudtrail-enabled",
+      "multi-region-cloudtrail-enabled",
+      "cw-loggroup-retention-period-check",
+      "s3-bucket-logging-enabled",
+      "rds-logging-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.2",
+    "nist_800_171": "3.3.2",
+    "title": "User Accountability",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Ensure that the actions of individual system users can be uniquely traced to those users, so they can be held accountable for their actions.",
+    "nist_mapping": [
+      "AU-2",
+      "AU-3",
+      "AU-3(1)",
+      "AU-6",
+      "AU-12"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "Amazon API Gateway",
+      "Elastic Load Balancing"
+    ],
+    "aws_config_rules": [
+      "cloudtrail-enabled",
+      "cloudtrail-s3-dataevents-enabled",
+      "elb-logging-enabled",
+      "api-gw-execution-logging-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.3",
+    "nist_800_171": "3.3.3",
+    "title": "Event Review",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Review and update logged events.",
+    "nist_mapping": [
+      "AU-2(3)"
+    ],
+    "aws_services": [
+      "AWS CloudTrail"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.4",
+    "nist_800_171": "3.3.4",
+    "title": "Audit Failure Alerting",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Alert in the event of an audit logging process failure.",
+    "nist_mapping": [
+      "AU-5"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "Amazon CloudWatch"
+    ],
+    "aws_config_rules": [
+      "cloudwatch-alarm-action-check",
+      "cloud-trail-cloud-watch-logs-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.5",
+    "nist_800_171": "3.3.5",
+    "title": "Audit Correlation",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Correlate audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity.",
+    "nist_mapping": [
+      "AU-6(3)"
+    ],
+    "aws_services": [
+      "AWS Security Hub",
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "guardduty-enabled-centralized",
+      "securityhub-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.6",
+    "nist_800_171": "3.3.6",
+    "title": "Reduction & Reporting",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Provide audit record reduction and report generation to support on-demand analysis and reporting.",
+    "nist_mapping": [
+      "AU-7"
+    ],
+    "aws_services": [
+      "Amazon Athena",
+      "Amazon CloudWatch"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.7",
+    "nist_800_171": "3.3.7",
+    "title": "Authoritative Time Source",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Provide a system capability that compares and synchronizes internal system clocks with an authoritative source to generate time stamps for audit records.",
+    "nist_mapping": [
+      "AU-8",
+      "AU-8(1)"
+    ],
+    "aws_services": [
+      "Amazon Time Sync Service"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.8",
+    "nist_800_171": "3.3.8",
+    "title": "Audit Protection",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Protect audit information and audit logging tools from unauthorized access, modification, and deletion.",
+    "nist_mapping": [
+      "AU-9"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "Amazon CloudWatch",
+      "Amazon S3"
+    ],
+    "aws_config_rules": [
+      "cloud-trail-encryption-enabled",
+      "cloud-trail-log-file-validation-enabled",
+      "cloudwatch-log-group-encrypted",
+      "s3-bucket-default-lock-enabled",
+      "s3-bucket-versioning-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "AU.L2-3.3.9",
+    "nist_800_171": "3.3.9",
+    "title": "Audit Management",
+    "domain": "Audit & Accountability",
+    "domain_code": "AU",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Limit management of audit logging functionality to a subset of privileged users.",
+    "nist_mapping": [
+      "AU-9(4)"
+    ],
+    "aws_services": [
+      "AWS IAM",
+      "AWS Organizations"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.1",
+    "nist_800_171": "3.4.1",
+    "title": "System Baselining",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Establish and maintain baseline configurations and inventories of organizational systems (including hardware, software, firmware, and documentation) throughout the respective system development life cycles.",
+    "nist_mapping": [
+      "CM-2",
+      "CM-6",
+      "CM-8",
+      "CM-8(1)"
+    ],
+    "aws_services": [
+      "AWS Systems Manager",
+      "Amazon EC2"
+    ],
+    "aws_config_rules": [
+      "ec2-managedinstance-association-compliance-status-check",
+      "ec2-volume-inuse-check",
+      "ec2-stopped-instance",
+      "eip-attached"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.2",
+    "nist_800_171": "3.4.2",
+    "title": "Security Configuration Enforcement",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Establish and enforce security configuration settings for information technology products employed in organizational systems.",
+    "nist_mapping": [
+      "CM-2",
+      "CM-6",
+      "CM-8",
+      "CM-8(1)"
+    ],
+    "aws_services": [
+      "AWS Organizations",
+      "AWS Systems Manager",
+      "Amazon RDS"
+    ],
+    "aws_config_rules": [
+      "ec2-instance-managed-by-systems-manager",
+      "ec2-managedinstance-patch-compliance-status-check",
+      "account-part-of-organizations",
+      "rds-automatic-minor-version-upgrade-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.3",
+    "nist_800_171": "3.4.3",
+    "title": "System Change Management",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Track, review, approve or disapprove, and log changes to organizational systems.",
+    "nist_mapping": [
+      "CM-3"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "AWS Systems Manager"
+    ],
+    "aws_config_rules": [
+      "cloudtrail-enabled",
+      "multi-region-cloudtrail-enabled",
+      "ec2-instance-managed-by-systems-manager"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.4",
+    "nist_800_171": "3.4.4",
+    "title": "Security Impact Analysis",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Analyze the security impact of changes prior to implementation.",
+    "nist_mapping": [
+      "CM-4"
+    ],
+    "aws_services": [
+      "AWS CloudFormation"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.5",
+    "nist_800_171": "3.4.5",
+    "title": "Access Restrictions for Change",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Define, document, approve, and enforce physical and logical access restrictions associated with changes to organizational systems.",
+    "nist_mapping": [
+      "CM-5"
+    ],
+    "aws_services": [
+      "AWS IAM",
+      "AWS Organizations"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.6",
+    "nist_800_171": "3.4.6",
+    "title": "Least Functionality",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Employ the principle of least functionality by configuring organizational systems to provide only essential capabilities.",
+    "nist_mapping": [
+      "CM-7"
+    ],
+    "aws_services": [
+      "AWS Systems Manager",
+      "Amazon EC2",
+      "Amazon VPC"
+    ],
+    "aws_config_rules": [
+      "ec2-instance-no-public-ip",
+      "restricted-common-ports",
+      "vpc-sg-open-only-to-authorized-ports",
+      "ssm-document-not-public"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.7",
+    "nist_800_171": "3.4.7",
+    "title": "Nonessential Functionality",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Restrict, disable, or prevent the use of nonessential programs, functions, ports, protocols, and services.",
+    "nist_mapping": [
+      "CM-7(1)",
+      "CM-7(2)"
+    ],
+    "aws_services": [
+      "Amazon VPC"
+    ],
+    "aws_config_rules": [
+      "restricted-ssh",
+      "restricted-common-ports",
+      "vpc-sg-open-only-to-authorized-ports",
+      "vpc-default-security-group-closed"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.8",
+    "nist_800_171": "3.4.8",
+    "title": "Application Execution Policy",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Apply deny-by-exception (blacklisting) policy to prevent the use of unauthorized software or deny-all, permit-by-exception (whitelisting) policy to allow the execution of authorized software.",
+    "nist_mapping": [
+      "CM-7(4)",
+      "CM-7(5)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "CM.L2-3.4.9",
+    "nist_800_171": "3.4.9",
+    "title": "User-Installed Software",
+    "domain": "Configuration Management",
+    "domain_code": "CM",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Control and monitor user-installed software.",
+    "nist_mapping": [
+      "CM-11"
+    ],
+    "aws_services": [
+      "AWS Systems Manager"
+    ],
+    "aws_config_rules": [
+      "ec2-instance-managed-by-systems-manager",
+      "ec2-managedinstance-association-compliance-status-check"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.1",
+    "nist_800_171": "3.5.1",
+    "title": "Identification",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Identify system users, processes acting on behalf of users, and devices.",
+    "nist_mapping": [
+      "IA-2",
+      "IA-5"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "Amazon EMR"
+    ],
+    "aws_config_rules": [
+      "cloudtrail-s3-dataevents-enabled",
+      "cloud-trail-cloud-watch-logs-enabled",
+      "emr-kerberos-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.2",
+    "nist_800_171": "3.5.2",
+    "title": "Authentication",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Authenticate (or verify) the identities of users, processes, or devices, as a prerequisite to allowing access to organizational systems.",
+    "nist_mapping": [
+      "IA-2",
+      "IA-5"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-password-policy",
+      "iam-user-mfa-enabled",
+      "mfa-enabled-for-iam-console-access",
+      "root-account-mfa-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.3",
+    "nist_800_171": "3.5.3",
+    "title": "Multifactor Authentication",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts.",
+    "nist_mapping": [
+      "IA-2(1)",
+      "IA-2(2)",
+      "IA-2(3)"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-user-mfa-enabled",
+      "mfa-enabled-for-iam-console-access",
+      "root-account-hardware-mfa-enabled",
+      "root-account-mfa-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.4",
+    "nist_800_171": "3.5.4",
+    "title": "Replay-Resistant Authentication",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Employ replay-resistant authentication mechanisms for network access to privileged and non-privileged accounts.",
+    "nist_mapping": [
+      "IA-2(8)",
+      "IA-2(9)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.5",
+    "nist_800_171": "3.5.5",
+    "title": "Identifier Reuse",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Prevent reuse of identifiers for a defined period.",
+    "nist_mapping": [
+      "IA-4"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.6",
+    "nist_800_171": "3.5.6",
+    "title": "Identifier Handling",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Disable identifiers after a defined period of inactivity.",
+    "nist_mapping": [
+      "IA-4"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-user-unused-credentials-check",
+      "iam-password-policy"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.7",
+    "nist_800_171": "3.5.7",
+    "title": "Password Complexity",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Enforce a minimum password complexity and change of characters when new passwords are created.",
+    "nist_mapping": [
+      "IA-5(1)"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-password-policy"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.8",
+    "nist_800_171": "3.5.8",
+    "title": "Password Reuse",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Prohibit password reuse for a specified number of generations.",
+    "nist_mapping": [
+      "IA-5(1)"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-password-policy"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.9",
+    "nist_800_171": "3.5.9",
+    "title": "Temporary Passwords",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Allow temporary password use for system logons with an immediate change to a permanent password.",
+    "nist_mapping": [
+      "IA-5(1)"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.10",
+    "nist_800_171": "3.5.10",
+    "title": "Cryptographically-Protected Passwords",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Store and transmit only cryptographically-protected passwords.",
+    "nist_mapping": [
+      "IA-5(1)"
+    ],
+    "aws_services": [
+      "Amazon EBS",
+      "Amazon RDS",
+      "Amazon S3",
+      "Elastic Load Balancing"
+    ],
+    "aws_config_rules": [
+      "s3-bucket-ssl-requests-only",
+      "elb-tls-https-listeners-only",
+      "encrypted-volumes",
+      "rds-storage-encrypted"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IA.L2-3.5.11",
+    "nist_800_171": "3.5.11",
+    "title": "Obscure Feedback",
+    "domain": "Identification & Authentication",
+    "domain_code": "IA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Obscure feedback of authentication information.",
+    "nist_mapping": [
+      "IA-6"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "IR.L2-3.6.1",
+    "nist_800_171": "3.6.1",
+    "title": "Incident Handling",
+    "domain": "Incident Response",
+    "domain_code": "IR",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities.",
+    "nist_mapping": [
+      "IR-2",
+      "IR-4",
+      "IR-5",
+      "IR-6",
+      "IR-7"
+    ],
+    "aws_services": [
+      "AWS Security Hub",
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "guardduty-enabled-centralized",
+      "guardduty-non-archived-findings",
+      "securityhub-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "IR.L2-3.6.2",
+    "nist_800_171": "3.6.2",
+    "title": "Incident Reporting",
+    "domain": "Incident Response",
+    "domain_code": "IR",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Track, document, and report incidents to designated officials and/or authorities both internal and external to the organization.",
+    "nist_mapping": [
+      "IR-2",
+      "IR-4",
+      "IR-5",
+      "IR-6",
+      "IR-7"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "IR.L2-3.6.3",
+    "nist_800_171": "3.6.3",
+    "title": "Incident Response Testing",
+    "domain": "Incident Response",
+    "domain_code": "IR",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Test the organizational incident response capability.",
+    "nist_mapping": [
+      "IR-3",
+      "IR-3(2)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MA.L2-3.7.1",
+    "nist_800_171": "3.7.1",
+    "title": "Perform Maintenance",
+    "domain": "Maintenance",
+    "domain_code": "MA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Perform maintenance on organizational systems.",
+    "nist_mapping": [
+      "MA-2",
+      "MA-3",
+      "MA-3(1)",
+      "MA-3(2)"
+    ],
+    "aws_services": [
+      "AWS Systems Manager"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MA.L2-3.7.2",
+    "nist_800_171": "3.7.2",
+    "title": "System Maintenance Control",
+    "domain": "Maintenance",
+    "domain_code": "MA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Provide controls on the tools, techniques, mechanisms, and personnel used to conduct system maintenance.",
+    "nist_mapping": [
+      "MA-2",
+      "MA-3",
+      "MA-3(1)",
+      "MA-3(2)"
+    ],
+    "aws_services": [
+      "AWS Systems Manager"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MA.L2-3.7.3",
+    "nist_800_171": "3.7.3",
+    "title": "Equipment Sanitization",
+    "domain": "Maintenance",
+    "domain_code": "MA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Ensure equipment removed for off-site maintenance is sanitized of any CUI.",
+    "nist_mapping": [
+      "MA-2"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MA.L2-3.7.4",
+    "nist_800_171": "3.7.4",
+    "title": "Media Inspection",
+    "domain": "Maintenance",
+    "domain_code": "MA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Check media containing diagnostic and test programs for malicious code before the media are used in organizational systems.",
+    "nist_mapping": [
+      "MA-3(2)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MA.L2-3.7.5",
+    "nist_800_171": "3.7.5",
+    "title": "Nonlocal Maintenance",
+    "domain": "Maintenance",
+    "domain_code": "MA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Require multifactor authentication to establish nonlocal maintenance sessions via external network connections and terminate such connections when nonlocal maintenance is complete.",
+    "nist_mapping": [
+      "MA-4"
+    ],
+    "aws_services": [
+      "AWS IAM"
+    ],
+    "aws_config_rules": [
+      "iam-user-mfa-enabled",
+      "mfa-enabled-for-iam-console-access"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "MA.L2-3.7.6",
+    "nist_800_171": "3.7.6",
+    "title": "Maintenance Personnel",
+    "domain": "Maintenance",
+    "domain_code": "MA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Supervise the maintenance activities of maintenance personnel without required access authorization.",
+    "nist_mapping": [
+      "MA-5"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.1",
+    "nist_800_171": "3.8.1",
+    "title": "Media Protection",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital.",
+    "nist_mapping": [
+      "MP-2",
+      "MP-4",
+      "MP-6"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.2",
+    "nist_800_171": "3.8.2",
+    "title": "Media Access",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Limit access to CUI on system media to authorized users.",
+    "nist_mapping": [
+      "MP-2",
+      "MP-4",
+      "MP-6"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.3",
+    "nist_800_171": "3.8.3",
+    "title": "Media Disposal",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Sanitize or destroy system media containing CUI before disposal or release for reuse.",
+    "nist_mapping": [
+      "MP-2",
+      "MP-4",
+      "MP-6"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.4",
+    "nist_800_171": "3.8.4",
+    "title": "Media Markings",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Mark media with necessary CUI markings and distribution limitations.",
+    "nist_mapping": [
+      "MP-3"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.5",
+    "nist_800_171": "3.8.5",
+    "title": "Media Accountability",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Control access to media containing CUI and maintain accountability for media during transport outside of controlled areas.",
+    "nist_mapping": [
+      "MP-5"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.6",
+    "nist_800_171": "3.8.6",
+    "title": "Portable Storage Encryption",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Implement cryptographic mechanisms to protect the confidentiality of CUI stored on digital media during transport unless otherwise protected by alternative physical safeguards.",
+    "nist_mapping": [
+      "MP-5(4)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.7",
+    "nist_800_171": "3.8.7",
+    "title": "Removable Media",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Control the use of removable media on system components.",
+    "nist_mapping": [
+      "MP-7"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.8",
+    "nist_800_171": "3.8.8",
+    "title": "Shared Media",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Prohibit the use of portable storage devices when such devices have no identifiable owner.",
+    "nist_mapping": [
+      "MP-7(1)"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "MP.L2-3.8.9",
+    "nist_800_171": "3.8.9",
+    "title": "Protect Backups",
+    "domain": "Media Protection",
+    "domain_code": "MP",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Protect the confidentiality of backup CUI at storage locations.",
+    "nist_mapping": [
+      "CP-9"
+    ],
+    "aws_services": [
+      "AWS Backup",
+      "AWS KMS"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "PS.L2-3.9.1",
+    "nist_800_171": "3.9.1",
+    "title": "Screen Individuals",
+    "domain": "Personnel Security",
+    "domain_code": "PS",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Screen individuals prior to authorizing access to organizational systems containing CUI.",
+    "nist_mapping": [
+      "PS-3"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "PS.L2-3.9.2",
+    "nist_800_171": "3.9.2",
+    "title": "Personnel Actions",
+    "domain": "Personnel Security",
+    "domain_code": "PS",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Ensure that organizational systems containing CUI are protected during and after personnel actions such as terminations and transfers.",
+    "nist_mapping": [
+      "PS-4",
+      "PS-5"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "PE.L2-3.10.1",
+    "nist_800_171": "3.10.1",
+    "title": "Limit Physical Access",
+    "domain": "Physical Protection",
+    "domain_code": "PE",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Limit physical access to organizational systems, equipment, and the respective operating environments to authorized individuals.",
+    "nist_mapping": [
+      "PE-2",
+      "PE-5",
+      "PE-6"
+    ],
+    "aws_services": [
+      "AWS Artifact"
+    ],
+    "aws_config_rules": [],
+    "notes": "Physical security of AWS data centers is inherited from AWS; AWS Artifact provides the audit reports as evidence. Your own facilities still need their own controls."
+  },
+  {
+    "id": "PE.L2-3.10.2",
+    "nist_800_171": "3.10.2",
+    "title": "Monitor Facility",
+    "domain": "Physical Protection",
+    "domain_code": "PE",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Protect and monitor the physical facility and support infrastructure for organizational systems.",
+    "nist_mapping": [
+      "PE-2",
+      "PE-5",
+      "PE-6"
+    ],
+    "aws_services": [
+      "AWS Artifact"
+    ],
+    "aws_config_rules": [],
+    "notes": "Physical security of AWS data centers is inherited from AWS; AWS Artifact provides the audit reports as evidence. Your own facilities still need their own controls."
+  },
+  {
+    "id": "PE.L2-3.10.3",
+    "nist_800_171": "3.10.3",
+    "title": "Escort Visitors",
+    "domain": "Physical Protection",
+    "domain_code": "PE",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Escort visitors and monitor visitor activity.",
+    "nist_mapping": [
+      "PE-3"
+    ],
+    "aws_services": [
+      "AWS Artifact"
+    ],
+    "aws_config_rules": [],
+    "notes": "Physical security of AWS data centers is inherited from AWS; AWS Artifact provides the audit reports as evidence. Your own facilities still need their own controls."
+  },
+  {
+    "id": "PE.L2-3.10.4",
+    "nist_800_171": "3.10.4",
+    "title": "Physical Access Logs",
+    "domain": "Physical Protection",
+    "domain_code": "PE",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Maintain audit logs of physical access.",
+    "nist_mapping": [
+      "PE-3"
+    ],
+    "aws_services": [
+      "AWS Artifact"
+    ],
+    "aws_config_rules": [],
+    "notes": "Physical security of AWS data centers is inherited from AWS; AWS Artifact provides the audit reports as evidence. Your own facilities still need their own controls."
+  },
+  {
+    "id": "PE.L2-3.10.5",
+    "nist_800_171": "3.10.5",
+    "title": "Manage Physical Access",
+    "domain": "Physical Protection",
+    "domain_code": "PE",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Control and manage physical access devices.",
+    "nist_mapping": [
+      "PE-3"
+    ],
+    "aws_services": [
+      "AWS Artifact"
+    ],
+    "aws_config_rules": [],
+    "notes": "Physical security of AWS data centers is inherited from AWS; AWS Artifact provides the audit reports as evidence. Your own facilities still need their own controls."
+  },
+  {
+    "id": "PE.L2-3.10.6",
+    "nist_800_171": "3.10.6",
+    "title": "Alternative Work Sites",
+    "domain": "Physical Protection",
+    "domain_code": "PE",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Enforce safeguarding measures for CUI at alternate work sites.",
+    "nist_mapping": [
+      "PE-17"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "RA.L2-3.11.1",
+    "nist_800_171": "3.11.1",
+    "title": "Risk Assessments",
+    "domain": "Risk Assessment",
+    "domain_code": "RA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Periodically assess the risk to organizational operations (including mission, functions, image, or reputation), organizational assets, and individuals, resulting from the operation of organizational systems and the associated processing, storage, or transmission of CUI.",
+    "nist_mapping": [
+      "RA-3"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "RA.L2-3.11.2",
+    "nist_800_171": "3.11.2",
+    "title": "Vulnerability Scan",
+    "domain": "Risk Assessment",
+    "domain_code": "RA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Scan for vulnerabilities in organizational systems and applications periodically and when new vulnerabilities affecting those systems and applications are identified.",
+    "nist_mapping": [
+      "RA-5",
+      "RA-5(5)"
+    ],
+    "aws_services": [
+      "AWS Security Hub",
+      "AWS Systems Manager",
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "ec2-managedinstance-patch-compliance-status-check",
+      "guardduty-enabled-centralized",
+      "securityhub-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "RA.L2-3.11.3",
+    "nist_800_171": "3.11.3",
+    "title": "Vulnerability Remediation",
+    "domain": "Risk Assessment",
+    "domain_code": "RA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Remediate vulnerabilities in accordance with risk assessments.",
+    "nist_mapping": [
+      "RA-5"
+    ],
+    "aws_services": [
+      "AWS Systems Manager",
+      "Amazon Inspector"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "CA.L2-3.12.1",
+    "nist_800_171": "3.12.1",
+    "title": "Security Control Assessment",
+    "domain": "Security Assessment",
+    "domain_code": "CA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Periodically assess the security controls in organizational systems to determine if the controls are effective in their application.",
+    "nist_mapping": [
+      "CA-2"
+    ],
+    "aws_services": [
+      "AWS Audit Manager"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "CA.L2-3.12.2",
+    "nist_800_171": "3.12.2",
+    "title": "Operational Plan of Action",
+    "domain": "Security Assessment",
+    "domain_code": "CA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Develop and implement plans of action designed to correct deficiencies and reduce or eliminate vulnerabilities in organizational systems.",
+    "nist_mapping": [
+      "CA-5"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "CA.L2-3.12.3",
+    "nist_800_171": "3.12.3",
+    "title": "Security Control Monitoring",
+    "domain": "Security Assessment",
+    "domain_code": "CA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Monitor security controls on an ongoing basis to ensure the continued effectiveness of the controls.",
+    "nist_mapping": [
+      "CA-7"
+    ],
+    "aws_services": [
+      "AWS Security Hub",
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "guardduty-enabled-centralized",
+      "securityhub-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "CA.L2-3.12.4",
+    "nist_800_171": "3.12.4",
+    "title": "System Security Plan",
+    "domain": "Security Assessment",
+    "domain_code": "CA",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Develop, document, and periodically update system security plans that describe system boundaries, system environments of operation, how security requirements are implemented, and the relationships with or connections to other systems.",
+    "nist_mapping": [
+      "PL-2"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.1",
+    "nist_800_171": "3.13.1",
+    "title": "Boundary Protection",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Monitor, control, and protect communications (i.e., information transmitted or received by organizational systems) at the external boundaries and key internal boundaries of organizational systems.",
+    "nist_mapping": [
+      "SC-7",
+      "SA-8"
+    ],
+    "aws_services": [
+      "AWS WAF",
+      "Amazon GuardDuty",
+      "Amazon VPC"
+    ],
+    "aws_config_rules": [
+      "alb-waf-enabled",
+      "vpc-default-security-group-closed",
+      "restricted-ssh",
+      "internet-gateway-authorized-vpc-only",
+      "guardduty-enabled-centralized"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.2",
+    "nist_800_171": "3.13.2",
+    "title": "Security Engineering",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Employ architectural designs, software development techniques, and systems engineering principles that promote effective information security within organizational systems.",
+    "nist_mapping": [
+      "SC-7",
+      "SA-8"
+    ],
+    "aws_services": [
+      "AWS Organizations",
+      "Amazon RDS",
+      "Amazon S3"
+    ],
+    "aws_config_rules": [
+      "account-part-of-organizations",
+      "rds-multi-az-support",
+      "s3-bucket-versioning-enabled",
+      "db-instance-backup-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.3",
+    "nist_800_171": "3.13.3",
+    "title": "Role Separation",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Separate user functionality from system management functionality.",
+    "nist_mapping": [
+      "SC-2"
+    ],
+    "aws_services": [
+      "AWS IAM",
+      "AWS Organizations"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.4",
+    "nist_800_171": "3.13.4",
+    "title": "Shared Resource Control",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Prevent unauthorized and unintended information transfer via shared system resources.",
+    "nist_mapping": [
+      "SC-4"
+    ],
+    "aws_services": [
+      "AWS Systems Manager",
+      "Amazon EBS",
+      "Amazon RDS",
+      "Amazon S3"
+    ],
+    "aws_config_rules": [
+      "ebs-snapshot-public-restorable-check",
+      "rds-snapshots-public-prohibited",
+      "s3-bucket-public-read-prohibited",
+      "ssm-document-not-public"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.5",
+    "nist_800_171": "3.13.5",
+    "title": "Public-Access System Separation",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Implement subnetworks for publicly accessible system components that are physically or logically separated from internal networks.",
+    "nist_mapping": [
+      "SC-7"
+    ],
+    "aws_services": [
+      "Amazon VPC"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.6",
+    "nist_800_171": "3.13.6",
+    "title": "Network Communication by Exception",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Deny network communications traffic by default and allow network communications traffic by exception (i.e., deny all, permit by exception).",
+    "nist_mapping": [
+      "SC-7(5)"
+    ],
+    "aws_services": [
+      "Amazon VPC"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.7",
+    "nist_800_171": "3.13.7",
+    "title": "Split Tunneling",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Prevent remote devices from simultaneously establishing non-remote connections with organizational systems and communicating via some other connection to resources in external networks (i.e., split tunneling).",
+    "nist_mapping": [
+      "SC-7(7)"
+    ],
+    "aws_services": [
+      "AWS Client VPN"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.8",
+    "nist_800_171": "3.13.8",
+    "title": "Data in Transit",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Implement cryptographic mechanisms to prevent unauthorized disclosure of CUI during transmission unless otherwise protected by alternative physical safeguards.",
+    "nist_mapping": [
+      "SC-8",
+      "SC-8(1)"
+    ],
+    "aws_services": [
+      "AWS Certificate Manager",
+      "Amazon Redshift",
+      "Amazon S3",
+      "Elastic Load Balancing"
+    ],
+    "aws_config_rules": [
+      "s3-bucket-ssl-requests-only",
+      "elb-tls-https-listeners-only",
+      "alb-http-to-https-redirection-check",
+      "redshift-require-tls-ssl",
+      "acm-certificate-expiration-check"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.9",
+    "nist_800_171": "3.13.9",
+    "title": "Connections Termination",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Terminate network connections associated with communications sessions at the end of the sessions or after a defined period of inactivity.",
+    "nist_mapping": [
+      "SC-10"
+    ],
+    "aws_services": [
+      "AWS Systems Manager",
+      "Elastic Load Balancing"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.10",
+    "nist_800_171": "3.13.10",
+    "title": "Key Management",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Establish and manage cryptographic keys for cryptography employed in organizational systems.",
+    "nist_mapping": [
+      "SC-12"
+    ],
+    "aws_services": [
+      "AWS KMS"
+    ],
+    "aws_config_rules": [
+      "cmk-backing-key-rotation-enabled",
+      "kms-cmk-not-scheduled-for-deletion"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.11",
+    "nist_800_171": "3.13.11",
+    "title": "CUI Encryption",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Employ FIPS-validated cryptography when used to protect the confidentiality of CUI.",
+    "nist_mapping": [
+      "SC-13"
+    ],
+    "aws_services": [
+      "AWS KMS"
+    ],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.12",
+    "nist_800_171": "3.13.12",
+    "title": "Collaborative Device Control",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Prohibit remote activation of collaborative computing devices and provide indication of devices in use to users present at the device.",
+    "nist_mapping": [
+      "SC-15"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.13",
+    "nist_800_171": "3.13.13",
+    "title": "Mobile Code",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Control and monitor the use of mobile code.",
+    "nist_mapping": [
+      "SC-18"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.14",
+    "nist_800_171": "3.13.14",
+    "title": "Voice over Internet Protocol",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Control and monitor the use of Voice over Internet Protocol (VoIP) technologies.",
+    "nist_mapping": [
+      "SC-19"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.15",
+    "nist_800_171": "3.13.15",
+    "title": "Communications Authenticity",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Protect the authenticity of communications sessions.",
+    "nist_mapping": [
+      "SC-23"
+    ],
+    "aws_services": [
+      "Amazon API Gateway",
+      "Elastic Load Balancing"
+    ],
+    "aws_config_rules": [
+      "elbv2-acm-certificate-required",
+      "elb-acm-certificate-required",
+      "api-gw-ssl-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SC.L2-3.13.16",
+    "nist_800_171": "3.13.16",
+    "title": "Data at Rest",
+    "domain": "System & Communications Protection",
+    "domain_code": "SC",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Protect the confidentiality of CUI at rest.",
+    "nist_mapping": [
+      "SC-28"
+    ],
+    "aws_services": [
+      "Amazon EBS",
+      "Amazon EFS",
+      "Amazon RDS",
+      "Amazon S3"
+    ],
+    "aws_config_rules": [
+      "encrypted-volumes",
+      "rds-storage-encrypted",
+      "s3-bucket-server-side-encryption-enabled",
+      "efs-encrypted-check",
+      "ec2-ebs-encryption-by-default"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SI.L2-3.14.1",
+    "nist_800_171": "3.14.1",
+    "title": "Flaw Remediation",
+    "domain": "System & Information Integrity",
+    "domain_code": "SI",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Identify, report, and correct system flaws in a timely manner.",
+    "nist_mapping": [
+      "SI-2",
+      "SI-3",
+      "SI-5"
+    ],
+    "aws_services": [
+      "AWS Security Hub",
+      "Amazon CloudWatch",
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "securityhub-enabled",
+      "guardduty-enabled-centralized",
+      "cloudwatch-alarm-action-check"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SI.L2-3.14.2",
+    "nist_800_171": "3.14.2",
+    "title": "Malicious Code Protection",
+    "domain": "System & Information Integrity",
+    "domain_code": "SI",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Provide protection from malicious code at designated locations within organizational systems.",
+    "nist_mapping": [
+      "SI-2",
+      "SI-3",
+      "SI-5"
+    ],
+    "aws_services": [
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "guardduty-enabled-centralized"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SI.L2-3.14.3",
+    "nist_800_171": "3.14.3",
+    "title": "Security Alerts & Advisories",
+    "domain": "System & Information Integrity",
+    "domain_code": "SI",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Monitor system security alerts and advisories and take action in response.",
+    "nist_mapping": [
+      "SI-2",
+      "SI-3",
+      "SI-5"
+    ],
+    "aws_services": [
+      "AWS Security Hub",
+      "Amazon CloudWatch",
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "securityhub-enabled",
+      "guardduty-enabled-centralized",
+      "cloudwatch-alarm-action-check"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SI.L2-3.14.4",
+    "nist_800_171": "3.14.4",
+    "title": "Update Malicious Code Protection",
+    "domain": "System & Information Integrity",
+    "domain_code": "SI",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Update malicious code protection mechanisms when new releases are available.",
+    "nist_mapping": [
+      "SI-3"
+    ],
+    "aws_services": [],
+    "aws_config_rules": [],
+    "notes": ""
+  },
+  {
+    "id": "SI.L2-3.14.5",
+    "nist_800_171": "3.14.5",
+    "title": "System & File Scanning",
+    "domain": "System & Information Integrity",
+    "domain_code": "SI",
+    "level": 1,
+    "cmmc_level": "Level 1",
+    "practice": "Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed.",
+    "nist_mapping": [
+      "SI-3"
+    ],
+    "aws_services": [
+      "Amazon ECR"
+    ],
+    "aws_config_rules": [
+      "ecr-private-image-scanning-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SI.L2-3.14.6",
+    "nist_800_171": "3.14.6",
+    "title": "Monitor Communications for Attacks",
+    "domain": "System & Information Integrity",
+    "domain_code": "SI",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Monitor organizational systems, including inbound and outbound communications traffic, to detect attacks and indicators of potential attacks.",
+    "nist_mapping": [
+      "SI-4",
+      "SI-4(4)"
+    ],
+    "aws_services": [
+      "AWS Security Hub",
+      "AWS WAF",
+      "Amazon GuardDuty"
+    ],
+    "aws_config_rules": [
+      "guardduty-enabled-centralized",
+      "wafv2-logging-enabled",
+      "alb-waf-enabled",
+      "securityhub-enabled"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "SI.L2-3.14.7",
+    "nist_800_171": "3.14.7",
+    "title": "Identify Unauthorized Use",
+    "domain": "System & Information Integrity",
+    "domain_code": "SI",
+    "level": 2,
+    "cmmc_level": "Level 2",
+    "practice": "Identify unauthorized use of organizational systems.",
+    "nist_mapping": [
+      "SI-4"
+    ],
+    "aws_services": [
+      "AWS CloudTrail",
+      "Amazon GuardDuty",
+      "Amazon S3",
+      "Elastic Load Balancing"
+    ],
+    "aws_config_rules": [
+      "cloudtrail-enabled",
+      "guardduty-enabled-centralized",
+      "s3-bucket-logging-enabled",
+      "elb-logging-enabled"
+    ],
+    "notes": ""
+  }
 ]

@@ -1,13 +1,15 @@
 """Core CMMC control mapping logic."""
 from __future__ import annotations
+
 import json
+import re
 from pathlib import Path
-from typing import Optional
 
 DATA_PATH = Path(__file__).parent.parent.parent / "data" / "cmmc_controls.json"
 
 DOMAINS = [
     "Access Control",
+    "Awareness & Training",
     "Audit & Accountability",
     "Configuration Management",
     "Identification & Authentication",
@@ -42,10 +44,22 @@ def get_controls_by_level(level: int) -> list[dict]:
     return controls  # Level 2 includes all Level 1 controls
 
 
-def get_control_by_id(control_id: str) -> Optional[dict]:
-    """Return a single control by its ID."""
+def normalize_control_id(control_id: str) -> str:
+    """Accept older CMMC 2.0 IDs ("AC.L1-3.1.1") and lower case.
+
+    The CMMC Level 2 Assessment Guide (v2.13) writes all 110 practices as
+    "XX.L2-3.x.y", including the 17 that are also Level 1. Older guides wrote
+    those 17 as "XX.L1-3.x.y"; both forms resolve to the same practice.
+    """
+    cid = control_id.strip().upper()
+    return re.sub(r"^([A-Z]{2})\.L1-", r"\1.L2-", cid)
+
+
+def get_control_by_id(control_id: str) -> dict | None:
+    """Return a single control by its ID (L1 or L2 form, any case)."""
+    wanted = normalize_control_id(control_id)
     for control in load_controls():
-        if control["id"] == control_id:
+        if control["id"] == wanted:
             return control
     return None
 
@@ -88,10 +102,12 @@ def search_controls(query: str) -> list[dict]:
     for control in load_controls():
         searchable = " ".join([
             control["id"],
+            control.get("title", ""),
             control["domain"],
             control["practice"],
             " ".join(control.get("aws_services", [])),
             " ".join(control.get("nist_mapping", [])),
+            " ".join(control.get("aws_config_rules", [])),
         ]).lower()
         if query in searchable:
             results.append(control)
