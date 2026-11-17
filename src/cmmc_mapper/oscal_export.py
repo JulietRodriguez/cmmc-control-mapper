@@ -1,10 +1,11 @@
 """OSCAL Component Definition export for CMMC controls."""
 from __future__ import annotations
+
 import json
 import uuid
 from datetime import datetime, timezone
-from typing import Optional
-from .mapper import load_controls, get_controls_by_level
+
+from .mapper import get_controls_by_level
 
 
 def generate_oscal_component_definition(
@@ -22,22 +23,32 @@ def generate_oscal_component_definition(
     # Build implemented requirements
     implemented_requirements = []
     for control in controls:
-        statements = []
-        for i, service in enumerate(control.get("aws_services", [])):
-            statements.append({
-                "statement-id": f"{control['id']}-stmt-{i+1}",
+        rules = control.get("aws_config_rules", [])
+        rules_text = ", ".join(rules) if rules else "none mapped"
+        statements = [
+            {
+                "statement-id": f"{control['id']}-stmt-{i + 1}",
                 "uuid": str(uuid.uuid4()),
                 "description": f"Implemented using {service}.",
-                "remarks": f"AWS Config rules: {', '.join(control.get('aws_config_rules', ['N/A']))}",
-            })
+                "remarks": f"AWS Config rules: {rules_text}",
+            }
+            for i, service in enumerate(control.get("aws_services", []))
+        ]
 
-        implemented_requirements.append({
+        requirement = {
             "uuid": str(uuid.uuid4()),
             "control-id": control["id"].lower().replace(".", "-"),
             "description": control["practice"],
-            "remarks": f"Domain: {control['domain']} | NIST Mappings: {', '.join(control.get('nist_mapping', []))}",
-            "statements": statements,
-        })
+            "remarks": (
+                f"Domain: {control['domain']} | NIST SP 800-53 (via SP 800-171 Rev. 2 "
+                f"Appendix D): {', '.join(control.get('nist_mapping', []))}"
+            ),
+        }
+        # OSCAL requires at least one statement when the key is present, so
+        # practices with no AWS service (training, personnel, ...) omit it.
+        if statements:
+            requirement["statements"] = statements
+        implemented_requirements.append(requirement)
 
     oscal_doc = {
         "component-definition": {
