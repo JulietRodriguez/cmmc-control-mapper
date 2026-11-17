@@ -27,7 +27,7 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: pip install -r requirements.txt pytest ruff jsonschema
+        run: pip install -r requirements.txt pytest "ruff==0.16.9" jsonschema
 
       - name: Lint
         run: ruff check src/ cli.py tests/ tools/

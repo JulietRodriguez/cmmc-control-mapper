@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from .mapper import get_controls_by_level
 
@@ -18,7 +18,7 @@ def generate_oscal_component_definition(
     CMMC controls to AWS service implementations.
     """
     controls = get_controls_by_level(level)
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
 
     # Build implemented requirements
     implemented_requirements = []
