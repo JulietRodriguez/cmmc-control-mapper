@@ -73,7 +73,7 @@ Older CMMC 2.0 guides wrote the 17 Level 1 practices as `AC.L1-3.1.1`. Lookups a
 ![Control Explorer](docs/screenshots/explorer.png)
 ![OSCAL Export](docs/screenshots/oscal_export.png)
 
-*These screenshots were taken before the dataset grew from 29 to 110 practices, so the counts in them are older.*
+*Overview, Control Explorer, and OSCAL Export pages of the live demo, showing all 110 practices.*
 
 ---
 
