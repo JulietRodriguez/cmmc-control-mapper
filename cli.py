@@ -2,18 +2,19 @@
 import argparse
 import json
 import sys
-from pathlib import Path
+
 from src.cmmc_mapper.mapper import (
-    load_controls, get_controls_by_domain, get_controls_by_level,
-    get_control_by_id, get_domain_summary, search_controls, DOMAINS
+    get_control_by_id,
+    get_controls_by_level,
+    get_domain_summary,
+    search_controls,
 )
 from src.cmmc_mapper.oscal_export import export_oscal_json
 
 try:
     from rich.console import Console
-    from rich.table import Table
     from rich.panel import Panel
-    from rich import print as rprint
+    from rich.table import Table
     RICH = True
 except ImportError:
     RICH = False
@@ -79,7 +80,7 @@ def cmd_detail(args):
 
 [yellow]NIST Mappings:[/yellow] {', '.join(control.get('nist_mapping', []))}
 [green]AWS Services:[/green]
-""" + "\n".join(f"  • {s}" for s in control.get("aws_services", [])) + f"""
+""" + "\n".join(f"  • {s}" for s in control.get("aws_services", [])) + """
 
 [blue]AWS Config Rules:[/blue]
 """ + "\n".join(f"  • {r}" for r in control.get("aws_config_rules", [])) if control.get("aws_config_rules") else "  None"
